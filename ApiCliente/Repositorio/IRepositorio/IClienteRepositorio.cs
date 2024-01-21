@@ -4,9 +4,8 @@ namespace ApiCliente.Repositorio.IRepositorio
 {
     public interface IClienteRepositorio
     {
-        ICollection<Cliente> GetCliente();
 
-        Cliente GetCliente(int id);
+        Cliente GetClienteIdentificacion(string identificacion);
 
         ICollection<Cliente> GetClientes();
 
@@ -17,8 +16,6 @@ namespace ApiCliente.Repositorio.IRepositorio
         bool BorrarCliente(Cliente cliente);
 
         bool ExisteCliente(string identificacion);
-        
-        bool ExisteCliente(int id);
 
         bool Guardar();
     }

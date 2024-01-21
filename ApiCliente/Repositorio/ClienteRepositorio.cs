@@ -31,16 +31,6 @@ namespace ApiPrueba.Repositorio
             return Guardar();
         }
 
-        public ICollection<Cliente> GetCliente()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Cliente GetCliente(int id)
-        {
-            return _bd.Cliente.FirstOrDefault(c => c.Id == id);
-        }
-
         public ICollection<Cliente> GetClientes()
         {
             return _bd.Cliente.OrderBy(c => c.Nombre).ToList();
@@ -52,14 +42,14 @@ namespace ApiPrueba.Repositorio
             return valor;
         }
 
-        public bool ExisteCliente(int id)
-        {
-            return _bd.Cliente.Any(c => c.Id == id);
-        }
-
         public bool Guardar()
         {
             return _bd.SaveChanges() >= 0 ? true : false;
+        }
+
+        public Cliente GetClienteIdentificacion(string identificacion)
+        {
+            return _bd.Cliente.FirstOrDefault(c => c.Identificacion == identificacion);
         }
     }
 }

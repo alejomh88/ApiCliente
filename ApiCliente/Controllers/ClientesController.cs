@@ -35,14 +35,14 @@ namespace ApiCliente.Controllers
             return Ok(listaClientesDto);
         }
 
-        [HttpGet("{clienteId:int}", Name = "GetCliente")]
+        [HttpGet("{identificacion:int}", Name = "GetClienteIdentificacion")]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetCliente(int clienteId)
+        public IActionResult GetClienteIdentificacion(string identificacion)
         {
-            var itemCliente = _clRepo.GetCliente(clienteId);
+            var itemCliente = _clRepo.GetClienteIdentificacion(identificacion);
 
             if (itemCliente == null)
             {
@@ -58,7 +58,7 @@ namespace ApiCliente.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult CrearCliente([FromBody] CrearClienteDto crearClienteDto)
+        public IActionResult CrearCliente([FromBody] ClienteDto crearClienteDto)
         {
             if (!ModelState.IsValid)
             {
@@ -80,21 +80,21 @@ namespace ApiCliente.Controllers
                 ModelState.AddModelError("", $"Algo salió mal guardando el registro {cliente.Nombre}");
                 return StatusCode(500, ModelState);
             }
-            return CreatedAtRoute("GetCliente", new { clienteId = cliente.Id }, cliente);
+            return CreatedAtRoute("GetClienteIdentificacion", new { identificacion = cliente.Identificacion }, cliente);
         }
 
-        [HttpPatch("{clienteId:int}", Name = "ActualizarPatchCliente")]
+        [HttpPatch("{identificacion:int}", Name = "ActualizarPatchCliente")]
         [ProducesResponseType(201, Type = typeof(ClienteDto))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult ActualizarPatchCliente(int clienteId, [FromBody] ClienteDto clienteDto)
+        public IActionResult ActualizarPatchCliente(string identificacion, [FromBody] ClienteDto clienteDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            if (clienteDto == null || clienteId != clienteDto.Id)
+            if (clienteDto == null || identificacion != clienteDto.Identificacion)
             {
                 return BadRequest(ModelState);
             }
@@ -109,19 +109,19 @@ namespace ApiCliente.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{clienteId:int}", Name = "BorrarCliente")]
+        [HttpDelete("{identificacion:int}", Name = "BorrarCliente")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult BorrarCliente(int clienteId)
+        public IActionResult BorrarCliente(string identificacion)
         {
-            if (!_clRepo.ExisteCliente(clienteId))
+            if (!_clRepo.ExisteCliente(identificacion))
             {
                 return NotFound();
             }
 
-            var cliente = _clRepo.GetCliente(clienteId);
+            var cliente = _clRepo.GetClienteIdentificacion(identificacion);
 
             if (!_clRepo.BorrarCliente(cliente))
             {

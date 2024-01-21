@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiCliente.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240119004912_CreacionTablaPersona")]
+    [Migration("20240121142846_CreacionTablaPersona")]
     partial class CreacionTablaPersona
     {
         /// <inheritdoc />
@@ -26,11 +26,8 @@ namespace ApiCliente.Migrations
 
             modelBuilder.Entity("ApiCliente.Modelos.Persona", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Identificacion")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Direccion")
                         .IsRequired()
@@ -47,10 +44,6 @@ namespace ApiCliente.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Identificacion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -59,7 +52,7 @@ namespace ApiCliente.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Identificacion");
 
                     b.ToTable("Persona");
 

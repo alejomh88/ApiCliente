@@ -5,7 +5,7 @@ namespace ApiCliente.Modelos
     public abstract class Persona
     {
         [Key]
-        public int Id { get; set; }
+        public string Identificacion { get; set; }
 
         [Required]  
         
@@ -14,8 +14,6 @@ namespace ApiCliente.Modelos
         public string Genero { get; set; }
 
         public int Edad { get; set; }
-
-        public string Identificacion { get; set; }
         
         public string Direccion { get; set; }
 

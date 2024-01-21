@@ -5,7 +5,7 @@ namespace ApiCliente.Modelos.Dto
     public class ClienteDto
     {
 
-        public int Id { get; set; }
+        public string Identificacion { get; set; }
 
         [Required]
 
@@ -14,8 +14,6 @@ namespace ApiCliente.Modelos.Dto
         public string Genero { get; set; }
 
         public int Edad { get; set; }
-
-        public string Identificacion { get; set; }
 
         public string Direccion { get; set; }
 
