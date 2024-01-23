@@ -2,7 +2,7 @@
 using ApiCliente.Modelos;
 using ApiCliente.Repositorio.IRepositorio;
 
-namespace ApiPrueba.Repositorio
+namespace ApiCliente.Repositorio
 {
     public class ClienteRepositorio : IClienteRepositorio
     {

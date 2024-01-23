@@ -1,7 +1,7 @@
 using ApiCliente.Data;
 using ApiCliente.Repositorio.IRepositorio;
-using ApiPrueba.ClienteMappers;
-using ApiPrueba.Repositorio;
+using ApiCliente.ClienteMappers;
+using ApiCliente.Repositorio;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

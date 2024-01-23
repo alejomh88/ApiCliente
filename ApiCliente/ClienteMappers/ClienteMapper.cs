@@ -2,7 +2,7 @@
 using ApiCliente.Modelos.Dto;
 using AutoMapper;
 
-namespace ApiPrueba.ClienteMappers
+namespace ApiCliente.ClienteMappers
 {
     public class CLienteMapper : Profile
     {
