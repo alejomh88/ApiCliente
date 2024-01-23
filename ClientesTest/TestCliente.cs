@@ -17,8 +17,6 @@ namespace ClientesTest
     public class TestCliente : BaseContextPrueba
     {
 
-        Mock<IClienteRepositorio> iClienteRepositorio;
-
         [Test]
         public async Task ObtenerCliente()
         {
@@ -39,7 +37,7 @@ namespace ClientesTest
                     Nombre = "Pedro",
                     Genero = "M",
                     Edad = 30,
-                    Identificacion = "1723456789",
+                    Identificacion = "0723456789",
                     Direccion = "abc",
                     Telefono = "123123",
                     Contraseña = "4321",
@@ -57,7 +55,7 @@ namespace ClientesTest
         }
 
         [Test]
-        public void EjecutarInterfaceCliente()
+        public void EjecutarCliente()
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -68,10 +66,6 @@ namespace ClientesTest
             string connectionString = configuration.GetConnectionString("ConexionSql");
             string NombreBD = connectionString;
             var context = ConstruirContext(NombreBD);
-
-            iClienteRepositorio = new Mock<IClienteRepositorio>();
-            iClienteRepositorio.Setup(x => x.GetClientes()).Returns(new List<Cliente>() { new Cliente() {
-            }});
 
             ClienteRepositorio rspObject = new ClienteRepositorio(context);
             var rsp = rspObject.GetClientes().ToList();

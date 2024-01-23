@@ -9,6 +9,7 @@ namespace ApiPrueba.ClienteMappers
         public CLienteMapper()
         {
             CreateMap<Cliente, ClienteDto>().ReverseMap();
+            CreateMap<Cliente, ActualizarClienteDto>().ReverseMap();
         }
     }
 }

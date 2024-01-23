@@ -50,7 +50,7 @@ namespace ApiCliente.Controllers
             }
 
             var itemClienteDto = _mapper.Map<ClienteDto>(itemCliente);
-            return Ok(itemCliente);
+            return Ok(itemClienteDto);
         }
 
         [HttpPost]
@@ -83,23 +83,24 @@ namespace ApiCliente.Controllers
             return CreatedAtRoute("GetClienteIdentificacion", new { identificacion = cliente.Identificacion }, cliente);
         }
 
-        [HttpPatch("{identificacion:int}", Name = "ActualizarPatchCliente")]
-        [ProducesResponseType(201, Type = typeof(ClienteDto))]
+        [HttpPatch("{identificacion}", Name = "ActualizarPatchCliente")]
+        [ProducesResponseType(201, Type = typeof(ActualizarClienteDto))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult ActualizarPatchCliente(string identificacion, [FromBody] ClienteDto clienteDto)
+        public IActionResult ActualizarPatchCliente(string identificacion, [FromBody] ActualizarClienteDto ActualizarClienteDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            if (clienteDto == null || identificacion != clienteDto.Identificacion)
+            if (ActualizarClienteDto == null)
             {
                 return BadRequest(ModelState);
             }
 
-            var cliente = _mapper.Map<Cliente>(clienteDto);
+            var cliente = _mapper.Map<Cliente>(ActualizarClienteDto);
+            cliente.Identificacion = identificacion;
 
             if (!_clRepo.ActualizarCliente(cliente))
             {
@@ -109,7 +110,7 @@ namespace ApiCliente.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{identificacion:int}", Name = "BorrarCliente")]
+        [HttpDelete("{identificacion}", Name = "BorrarCliente")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
